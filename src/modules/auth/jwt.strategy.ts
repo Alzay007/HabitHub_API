@@ -1,15 +1,19 @@
-// modules/auth/jwt.strategy.ts
-import { Injectable } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
+import {Injectable} from '@nestjs/common';
+import {PassportStrategy} from '@nestjs/passport';
+import {ExtractJwt, Strategy} from 'passport-jwt';
+import {ConfigService} from '@nestjs/config';
+
+interface JwtPayload {
+  sub: string;
+  email: string;
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly configService: ConfigService) {
-    const secret = configService.get<string>('JWT_SECRET');
+    const secret = configService.get<string>('JWT_ACCESS_SECRET');
     if (!secret) {
-      throw new Error('JWT_SECRET must be defined in environment variables');
+      throw new Error('JWT_ACCESS_SECRET must be defined in environment variables');
     }
 
     super({
@@ -19,7 +23,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
-    return { userId: payload.sub, email: payload.email };
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async validate(payload: JwtPayload) {
+    return {userId: payload.sub, email: payload.email};
   }
 }

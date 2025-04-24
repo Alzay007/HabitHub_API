@@ -1,7 +1,6 @@
-// @ts-check
 import eslint from '@eslint/js';
+import eslintPluginPrettier from 'eslint-plugin-prettier';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -27,7 +26,7 @@ export default tseslint.config(
       },
     },
     plugins: {
-      prettier: prettierPlugin,
+      prettier: eslintPluginPrettier,
     },
   },
 
@@ -39,7 +38,16 @@ export default tseslint.config(
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      'prettier/prettier': ['error'],
+      'prettier/prettier': ['error', {
+        singleQuote: true,
+        semi: true,
+        tabWidth: 2,
+        printWidth: 100,
+        trailingComma: 'all',
+        bracketSpacing: false,
+        arrowParens: 'avoid',
+        endOfLine: 'lf',
+      }],
     },
   },
 );

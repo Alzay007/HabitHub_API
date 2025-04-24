@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HabitModule } from './modules/habits/habit.module';
 import * as dotenv from 'dotenv';
+import { AuthModule } from '@modules/auth/auth.module';
 
 dotenv.config();
 
@@ -10,8 +11,8 @@ dotenv.config();
     MongooseModule.forRoot(process.env.MONGO_URI as string, {
       dbName: process.env.MONGO_DB_NAME,
     }),
-    HabitModule
+    HabitModule,
+    AuthModule,
   ],
 })
-
 export class AppModule { }

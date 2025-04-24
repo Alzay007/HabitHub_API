@@ -1,13 +1,16 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
-import { HabitService } from './habit.service';
-import { Habit } from './habit.model';
+import {Controller, Get, Post, Body, Param, Delete, Put} from '@nestjs/common';
+import {HabitService} from './habit.service';
+import {Habit} from './habit.model';
 
 @Controller('habits')
 export class HabitController {
-  constructor(private readonly habitService: HabitService) { }
+  constructor(private readonly habitService: HabitService) {}
 
   @Post()
-  async create(@Body('name') name: string, @Body('description') description: string): Promise<Habit> {
+  async create(
+    @Body('name') name: string,
+    @Body('description') description: string,
+  ): Promise<Habit> {
     return this.habitService.createHabit(name, description);
   }
 
