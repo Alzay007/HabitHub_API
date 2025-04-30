@@ -39,7 +39,7 @@ export class HabitController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<Habit | null> {
+  async remove(@Param('id') id: string): Promise<{message: string; habit: Habit}> {
     return this.habitService.deleteHabit(id);
   }
 }

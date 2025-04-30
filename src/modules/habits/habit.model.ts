@@ -1,6 +1,5 @@
 import {Schema, Document, model} from 'mongoose';
 
-// Інтерфейс для звички
 export interface Habit extends Document {
   name: string;
   description: string;
@@ -13,7 +12,6 @@ export interface Habit extends Document {
   updatedAt: Date;
 }
 
-// Схема для звички
 const habitSchema = new Schema<Habit>(
   {
     name: {type: String, required: true},
@@ -27,5 +25,4 @@ const habitSchema = new Schema<Habit>(
   {timestamps: true},
 );
 
-// Модель для звички
 export const HabitModel = model<Habit>('Habit', habitSchema);

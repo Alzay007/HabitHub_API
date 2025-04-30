@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { HabitModule } from './modules/habits/habit.module';
+import {Module} from '@nestjs/common';
+import {MongooseModule} from '@nestjs/mongoose';
+import {HabitModule} from './modules/habits/habit.module';
 import * as dotenv from 'dotenv';
-import { AuthModule } from '@modules/auth/auth.module';
+import {AuthModule} from '@modules/auth/auth.module';
 
 dotenv.config();
 
@@ -15,4 +15,4 @@ dotenv.config();
     AuthModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
