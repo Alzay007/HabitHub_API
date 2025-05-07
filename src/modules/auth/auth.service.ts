@@ -58,14 +58,14 @@ export class AuthService {
   async register(
     createUserDto: CreateUserDto,
   ): Promise<{accessToken: string; refreshToken: string}> {
-    const {email, password} = createUserDto;
+    const {firstName, lastName, email, password} = createUserDto;
     const existingUser = await this.userModel.findOne({email});
     if (existingUser) {
       throw new Error('User already exists');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new this.userModel({email, password: hashedPassword});
+    const newUser = new this.userModel({firstName, lastName, email, password: hashedPassword});
     const user = await newUser.save();
 
     // eslint-disable-next-line @typescript-eslint/no-base-to-string
